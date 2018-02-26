@@ -83,7 +83,17 @@ class guest_get_information(Resource):
         user = User("guest")
         return jsonify(user.get_other_information
                 (request.json['user_id']))
+    
+class update_user(Resource):
+    @login_required
+    def post(self):
+        mesage = user.update_user(request.json)
+        if mesage:
+            return jsonify(status = 1,message = "success")
+        else:
+            return jsonify(status = 0,message = mesage)
 
+    
 class upload_avatar(Resource):
     #上传卡片图像的类
     @login_required
